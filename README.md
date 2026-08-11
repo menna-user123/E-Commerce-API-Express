@@ -1,10 +1,23 @@
-init node.js project >> npm init -y
-in package.json >> in script make dev to run server
-install express and its types >> npm i express,npm i @types/express
-install typescript>>npm i -D typescript
-install .env>>npm install dotenv
-install mongoose>>npm install mongoose
-install morgan and its types>>npm install morgan,npm install -D @types/morgan
-install helmet>>npm install helmet
-install express-rate-limit>>npm install express-rate-limit
-run dev>> npm run dev
+# E-Commerce-API-Express
+
+## Installation
+
+### 1. Clone the repository
+
+Clone the GitHub repository to your computer.
+
+```bash
+git clone https://github.com/menna-user123/E-Commerce-API-Express.git
+ npm init -y
+ npm i express
+ npm i @types/express
+ >npm i -D typescript
+ npm install dotenv
+ npm install mongoose
+ npm install morgan
+ npm install -D @types/morgan
+npm install helmet
+npm install express-rate-limit
+ npm run dev
+
+```
