@@ -6,10 +6,12 @@
 import { APPERROR } from "../Utils/apperror.js";
 import { UserServices } from "../services/USER.services.js";
 import { type Response, type Request } from "express";
-
+import { validateUserBody } from "../Utils/validation.js";
+import { validateUserUpdateBody } from "../Utils/validation.js";
 const Userservice = new UserServices();
 export class Usercontroller {
   async createuser(req: Request, res: Response) {
+    validateUserBody(req.body);
     const user = await Userservice.createUser(req.body);
     if (!user) throw new APPERROR("user not created", 404);
     return res.status(201).json({ status: "user created" });
@@ -28,6 +30,7 @@ export class Usercontroller {
   }
 
   async updateuserpartial(req: Request, res: Response) {
+    validateUserUpdateBody(req.body);
     const user = await Userservice.updateUserByIdpartial(
       req.params.id,
       req.body,

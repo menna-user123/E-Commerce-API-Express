@@ -1,6 +1,8 @@
 import { CartService } from "../services/CART.services.js";
 import { APPERROR } from "../Utils/apperror.js";
 import { type Response, type Request } from "express";
+import { validateAddProductToCartBody } from "../Utils/validation.js";
+import { validateCartQuantityBody } from "../Utils/validation.js";
 const cartservices = new CartService();
 export class cartcontroller {
   async getcarts(req: Request, res: Response) {
@@ -21,11 +23,13 @@ export class cartcontroller {
     return res.status(201).json({ status: "cart deleted" });
   }
   async addproducttocart(req: Request, res: Response) {
+    validateAddProductToCartBody(req.body);
     const data = await cartservices.AddproductTocart(
       req.body.productId,
       req.params.userId,
       req.body.quantity,
     );
+
     if (!data) throw new APPERROR("cart not added", 404);
     return res.status(201).json({ status: "cart added" });
   }
@@ -38,6 +42,7 @@ export class cartcontroller {
     return res.status(201).json({ status: "product removed" });
   }
   async updateproductquantity(req: Request, res: Response) {
+    validateCartQuantityBody(req.body);
     const data = await cartservices.updateproductquantityfromcart(
       req.params.productId,
       req.params.userId,

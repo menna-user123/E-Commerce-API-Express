@@ -1,6 +1,7 @@
 import { APPERROR } from "../Utils/apperror.js";
 import { orderservices } from "../services/ORDER.services.js";
 import { type Response, type Request } from "express";
+import { validateOrderUpdateBody } from "../Utils/validation.js";
 const Orderservice = new orderservices();
 export class Ordercontroller {
   async getorders(req: Request, res: Response) {
@@ -16,6 +17,7 @@ export class Ordercontroller {
   }
 
   async updateOrderpartial(req: Request, res: Response) {
+    validateOrderUpdateBody(req.body);
     const order = await Orderservice.updateOrderByIdpartial(
       req.params.id,
       req.body,
